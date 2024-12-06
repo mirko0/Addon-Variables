@@ -2,8 +2,8 @@ package com.kihron.upcvariables.guis;
 
 import me.TechsCode.UltraCustomizer.ColorPalette;
 import me.TechsCode.UltraCustomizer.UltraCustomizer;
-import me.TechsCode.UltraCustomizer.addons.gui.AddonsMarketplaceListView;
-import me.TechsCode.UltraCustomizer.addons.gui.InstalledAddonsView;
+import me.TechsCode.UltraCustomizer.base.addons.gui.AddonsMarketplaceListView;
+import me.TechsCode.UltraCustomizer.base.addons.gui.InstalledAddonsView;
 import me.TechsCode.UltraCustomizer.base.gui.Button;
 import me.TechsCode.UltraCustomizer.base.gui.GUI;
 import me.TechsCode.UltraCustomizer.base.gui.Model;

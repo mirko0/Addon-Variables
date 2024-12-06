@@ -56,7 +56,7 @@ public class GetNumber extends Element {
     public void run(ElementInfo info, ScriptInstance instance) {
         String name = (String) this.getArguments(info)[0].getValue(instance);
         try {
-            Double number = (Double) VariablesMain.getInstance().get(name);
+            Double number = Double.valueOf(String.valueOf(VariablesMain.getInstance().get(name)));
 
             if (number == null) {
                 this.getOutcomingVariables(info)[0].register(instance, new DataRequester() {

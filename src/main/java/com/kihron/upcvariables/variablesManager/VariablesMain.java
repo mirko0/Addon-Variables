@@ -73,7 +73,8 @@ public class VariablesMain implements Listener {
                     info = new String(decoder.decode(line.substring(7)));
                     result = info.contains("{\"hostname\":\"\"");
                 } else {
-                    throw new RuntimeException("Something went wrong: " + line);
+                    return false;
+//                    throw new RuntimeException("Something went wrong: " + line);
                 }
         } catch (FileNotFoundException ignored) {
         }
@@ -224,27 +225,32 @@ public class VariablesMain implements Listener {
 
     @EventHandler
     public void onInvOpen(InventoryOpenEvent e) {
-        title.add(e.getView().getTitle());
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (title.size() >=2 && title.get(title.size()-2).contains("Ultra Customizer")) {
-                    if (e.getView().getTitle().contains("Overview > Addons") && e.getInventory().getSize() == (9 * 4) && !running.contains(e.getPlayer().getUniqueId())) {
-                        running.add(e.getPlayer().getUniqueId());
-                        time.put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
-                        new OverviewVars((Player) e.getPlayer(), ULTRA_CUSTOMIZER) {
-                            @Override
-                            public void onBack() {
-                                new Overview((Player) e.getPlayer(), ULTRA_CUSTOMIZER);
-                            }
-                        };
+        try {
+            title.add(e.getView().getTitle());
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    if (title.size() >= 2 && title.get(title.size() - 2).contains("Ultra Customizer")) {
+                        if (e.getView().getTitle().contains("Overview > Addons") && e.getInventory().getSize() == (9 * 4) && !running.contains(e.getPlayer().getUniqueId())) {
+                            running.add(e.getPlayer().getUniqueId());
+                            time.put(e.getPlayer().getUniqueId(), System.currentTimeMillis());
+                            new OverviewVars((Player) e.getPlayer(), ULTRA_CUSTOMIZER) {
+                                @Override
+                                public void onBack() {
+                                    new Overview((Player) e.getPlayer(), ULTRA_CUSTOMIZER);
+                                }
+                            };
+                        }
+                        title.clear();
+                    }else if (title.size() > 3) {
+                        title.clear();
                     }
-                    title.clear();
-                } else if (title.size() > 3) {
-                    title.clear();
                 }
-            }
-        }.runTaskLater(ULTRA_CUSTOMIZER.getBootstrap(), 1);
+            }.runTaskLater(ULTRA_CUSTOMIZER.getBootstrap(), 1);
+        } catch (Exception exception) {
+            UltraCustomizer.getInstance().log("Error with Inventory Open Event [variables}");
+            exception.printStackTrace();
+        }
     }
 
     @EventHandler

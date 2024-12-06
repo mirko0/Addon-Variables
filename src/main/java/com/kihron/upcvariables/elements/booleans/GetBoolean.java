@@ -56,7 +56,7 @@ public class GetBoolean extends Element {
     public void run(ElementInfo info, ScriptInstance instance) {
         String name = (String) this.getArguments(info)[0].getValue(instance);
         try {
-            Boolean b = (Boolean) VariablesMain.getInstance().get(name);
+            Boolean b = Boolean.parseBoolean(String.valueOf(VariablesMain.getInstance().get(name)));
 
             if (b == null) {
                 VariablesMain.getInstance().sendError(name, 0);

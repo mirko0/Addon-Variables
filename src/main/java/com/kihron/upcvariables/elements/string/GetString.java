@@ -56,7 +56,7 @@ public class GetString extends Element {
     public void run(ElementInfo info, ScriptInstance instance) {
         String name = (String) this.getArguments(info)[0].getValue(instance);
         try {
-            String string = (String) VariablesMain.getInstance().get(name);
+            String string = String.valueOf(VariablesMain.getInstance().get(name));
 
             if (string == null) {
                 this.getOutcomingVariables(info)[0].register(instance, new DataRequester() {

@@ -62,11 +62,11 @@ public class StoreNumber extends Element {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            this.getOutcomingVariables(info)[0].register(instance, new DataRequester() {
+           /* this.getOutcomingVariables(info)[0].register(instance, new DataRequester() {
                 public Object request() {
                     return null;
                 }
-            });
+            });*/
         }
         this.getConnectors(info)[0].run(instance);
     }
